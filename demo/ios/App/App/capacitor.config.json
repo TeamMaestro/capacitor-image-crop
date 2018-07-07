@@ -1,0 +1,6 @@
+{
+  "appId": "com.github.imagecropdemo",
+  "appName": "ImageCropDemo",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}

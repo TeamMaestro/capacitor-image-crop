@@ -1,0 +1,8 @@
+.idea
+node_modules
+.DS_Store
+dist
+src/ios/Plugin/Pods/
+demo/android/app/src/main/assets
+src/android/capacitor-image-crop/build
+demo/android/app/build

@@ -1,0 +1,41 @@
+PODS:
+  - Capacitor (1.0.0-alpha.39):
+    - CapacitorCordova (= 1.0.0-alpha.39)
+    - GCDWebServer (~> 3.0)
+  - CapacitorCordova (1.0.0-alpha.39)
+  - CapacitorImageCrop (0.0.3):
+    - Capacitor
+    - CropViewController
+  - CropViewController (2.3.6)
+  - GCDWebServer (3.4.2):
+    - GCDWebServer/Core (= 3.4.2)
+  - GCDWebServer/Core (3.4.2)
+
+DEPENDENCIES:
+  - "Capacitor (from `../../node_modules/@capacitor/ios`)"
+  - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
+  - CapacitorImageCrop (from `../../node_modules/capacitor-image-crop`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CropViewController
+    - GCDWebServer
+
+EXTERNAL SOURCES:
+  Capacitor:
+    :path: "../../node_modules/@capacitor/ios"
+  CapacitorCordova:
+    :path: "../../node_modules/@capacitor/ios"
+  CapacitorImageCrop:
+    :path: "../../node_modules/capacitor-image-crop"
+
+SPEC CHECKSUMS:
+  Capacitor: 694bd651f06ece975ddf33d78d012a0d0fbece57
+  CapacitorCordova: 1ce96e3c67c9b90e850e563798255268c5a8984b
+  CapacitorImageCrop: a84f93f86f06b7c0e3cdddea0e2b8a1cf0a734ff
+  CropViewController: e6d4bd512d15a1709e9ddf71fe7d98ffd05dda0f
+  GCDWebServer: 8d67ee9f634b4bb91eb4b8aee440318a5fc6debd
+
+PODFILE CHECKSUM: 733499740204fb8c3ac7cb0208dc1fc7777d6f3d
+
+COCOAPODS: 1.5.3
