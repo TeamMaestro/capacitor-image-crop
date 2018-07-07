@@ -22,24 +22,31 @@ public class ImageCropPlugin: CAPPlugin, CropViewControllerDelegate {
 
 
         DispatchQueue.main.async {
-            let vc = CropViewController.init(image: UIImage(named: (Bundle.main.resourceURL?.path)! + "/public/assets/imgs/all_might.jpg")!)
-            vc.delegate = self
-            if(lock){
-                vc.aspectRatioLockEnabled = true
-                vc.resetAspectRatioEnabled = false
-                vc.aspectRatioPickerButtonHidden = true;
-                vc.aspectRatioPreset = CropViewControllerAspectRatioPreset.presetSquare
+            let vc : CropViewController?
+
+            if(source.starts(with: "~")){
+                vc = CropViewController.init(image: UIImage(named: (Bundle.main.resourceURL?.path)! + "/public" + source.replacingOccurrences(of: "~", with: ""))!)
+            }else{
+                vc = CropViewController.init(image: UIImage(named: URL(fileURLWithPath: source).path)!)
             }
 
-            self.bridge.viewController.present(vc, animated: true, completion: {
+            vc?.delegate = self
+            if(lock){
+                vc?.aspectRatioLockEnabled = true
+                vc?.resetAspectRatioEnabled = false
+                vc?.aspectRatioPickerButtonHidden = true;
+                vc?.aspectRatioPreset = CropViewControllerAspectRatioPreset.presetSquare
+            }
+
+            self.bridge.viewController.present(vc!, animated: true, completion: {
                 if(width > 0 && height > 0){
-                    vc.toolbar.clampButtonHidden = true;
+                    vc?.toolbar.clampButtonHidden = true;
                     let gcd = ImageCropPlugin.gcd(width: width, height: height)
                     if(ratio != ""){
                         let r = ratio.split(separator: ":")
-                        vc.cropView.setAspectRatio(CGSize(width: Int(r[0])!, height: Int(r[1])!), animated: false)
+                        vc?.cropView.setAspectRatio(CGSize(width: Int(r[0])!, height: Int(r[1])!), animated: false)
                     }else{
-                        vc.cropView.setAspectRatio(CGSize(width: width / gcd, height: height / gcd), animated: false)
+                        vc?.cropView.setAspectRatio(CGSize(width: width / gcd, height: height / gcd), animated: false)
                     }
 
                 }
