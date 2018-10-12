@@ -19,7 +19,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
+import java.util.UUID;
 
 @NativePlugin(
         requestCodes =  { UCrop.REQUEST_CROP }
@@ -53,7 +53,7 @@ public class ImageCropPlugin extends Plugin {
         String source = call.getString("source");
         int width = call.getInt("width");
         int height = call.getInt("height");
-        File dest = new File( getActivity().getCacheDir().getAbsolutePath() + "/CAP_CROP.jpg");
+        File dest = new File( getActivity().getCacheDir().getAbsolutePath() + "/" + UUID.randomUUID().toString() + ".jpg");
 
         if(source.contains("~")){
             source = source.replace("~","");

@@ -9,7 +9,7 @@ public class ImageCropPlugin: CAPPlugin, CropViewControllerDelegate {
         let source = call.getString("source") ?? ""
         let width = call.getInt("width") ?? 0
         let height = call.getInt("height") ?? 0
-        let lock = call.getBool("lock") ?? false
+        let lock = call.getBool("lock") ?? !(width > 0 && height > 0)
         let ratio = call.getString("ratio") ?? ""
 
 
@@ -31,29 +31,27 @@ public class ImageCropPlugin: CAPPlugin, CropViewControllerDelegate {
             }
 
             vc?.delegate = self
-            if(lock){
+            if (lock) {
                 vc?.aspectRatioLockEnabled = true
                 vc?.resetAspectRatioEnabled = false
                 vc?.aspectRatioPickerButtonHidden = true;
                 vc?.aspectRatioPreset = CropViewControllerAspectRatioPreset.presetSquare
             }
+            
+            if (width > 0 && height > 0) {
+                vc?.toolbar.clampButtonHidden = true;
+                let gcd = ImageCropPlugin.gcd(width: width, height: height)
+                vc?.customAspectRatio = CGSize(width: width / gcd, height: height / gcd)
+            }
+            else if (ratio != "") {
+                vc?.toolbar.clampButtonHidden = true;
+                let r = ratio.split(separator: ":")
+                vc?.customAspectRatio = CGSize(width: Int(r[0])!, height: Int(r[1])!)
+            }
 
-            self.bridge.viewController.present(vc!, animated: true, completion: {
-                if(width > 0 && height > 0){
-                    vc?.toolbar.clampButtonHidden = true;
-                    let gcd = ImageCropPlugin.gcd(width: width, height: height)
-                    if(ratio != ""){
-                        let r = ratio.split(separator: ":")
-                        vc?.cropView.setAspectRatio(CGSize(width: Int(r[0])!, height: Int(r[1])!), animated: false)
-                    }else{
-                        vc?.cropView.setAspectRatio(CGSize(width: width / gcd, height: height / gcd), animated: false)
-                    }
-
-                }
-            })
+            self.bridge.viewController.present(vc!, animated: true)
         }
     }
-
 
     private static func gcd(width: Int, height: Int) -> Int {
         if (height == 0) {
@@ -68,7 +66,7 @@ public class ImageCropPlugin: CAPPlugin, CropViewControllerDelegate {
         let call = self.bridge.getSavedCall(self.id!)
         do {
             if(call != nil){
-                let path = URL.init(fileURLWithPath: FileManager.default.temporaryDirectory.path + "/CAP_CROP.jpg")
+                let path = URL.init(fileURLWithPath: FileManager.default.temporaryDirectory.path + "/" + NSUUID().uuidString + ".jpg")
                 let width = call?.getInt("width") ?? 0
                 let height = call?.getInt("height") ?? 0
                 if(width > 0 && height > 0 ){
