@@ -68,7 +68,7 @@ public class ImageCropPlugin: CAPPlugin, CropViewControllerDelegate {
         let call = self.bridge.getSavedCall(self.id!)
         do {
             if(call != nil){
-                let path = URL.init(fileURLWithPath: FileManager.default.temporaryDirectory.path + "/CAP_CROP.jpg")
+                let path = URL.init(fileURLWithPath: FileManager.default.temporaryDirectory.path + "/" + NSUUID().uuidString + ".jpg")
                 let width = call?.getInt("width") ?? 0
                 let height = call?.getInt("height") ?? 0
                 if(width > 0 && height > 0 ){
