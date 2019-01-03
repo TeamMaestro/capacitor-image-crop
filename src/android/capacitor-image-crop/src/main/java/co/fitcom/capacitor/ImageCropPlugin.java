@@ -62,7 +62,7 @@ public class ImageCropPlugin extends Plugin {
         AndroidProtocolHandler protocolHandler = new AndroidProtocolHandler(getActivity().getApplicationContext());
         try {
             File f = new File("file:///android_asset/public" + source);
-           InputStream is = protocolHandler.openAsset("public" + source,"");
+            InputStream is = protocolHandler.openAsset("public" + source);
             File tempSource = new File(getActivity().getCacheDir().getAbsolutePath() + f.getName());
             FileOutputStream os = new FileOutputStream(tempSource);
             IOUtils.copy(is,os);
