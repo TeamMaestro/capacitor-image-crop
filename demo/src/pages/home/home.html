@@ -7,6 +7,7 @@
 </ion-header>
 
 <ion-content padding>
+  <button ion-button (click)="takePhotoAndShowCrop()">Take Photo & Crop</button>
   <button ion-button (click)="showCrop()">Crop</button>
   <img [src]="src"/>
 </ion-content>
