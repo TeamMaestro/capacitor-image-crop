@@ -80,7 +80,7 @@ public class ImageCropPlugin: CAPPlugin, CropViewControllerDelegate {
                     try UIImageJPEGRepresentation(image, 1.0)?.write(to: path, options: Data.WritingOptions.atomic)
                 }
                 var object = JSObject()
-                object["value"] = CAPFileManager.getPortablePath(uri: path)
+                object["value"] = CAPFileManager.getPortablePath(host: self.bridge.getLocalUrl(), uri: path)
                 call?.resolve(object)
             }
 
