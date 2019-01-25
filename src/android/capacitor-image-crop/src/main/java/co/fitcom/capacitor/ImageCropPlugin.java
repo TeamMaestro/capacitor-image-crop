@@ -42,7 +42,7 @@ public class ImageCropPlugin extends Plugin {
         if (resultCode == Activity.RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
             final Uri resultUri = UCrop.getOutput(data);
             JSObject object = new JSObject();
-            object.put("value", FileUtils.getPortablePath(getContext(), resultUri));
+            object.put("value", FileUtils.getPortablePath(getContext(), bridge.getLocalUrl(), resultUri));
             savedCall.resolve(object);
         } else if (resultCode == UCrop.RESULT_ERROR) {
             final Throwable cropError = UCrop.getError(data);
