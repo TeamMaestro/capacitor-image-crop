@@ -1,7 +1,7 @@
 
   Pod::Spec.new do |s|
     s.name = 'CapacitorImageCrop'
-    s.version = '1.0.0'
+    s.version = '2.0.0'
     s.summary = 'Image cropper'
     s.license = 'MIT'
     s.homepage = 'https://github.com/triniwiz/capacitor-image-crop'

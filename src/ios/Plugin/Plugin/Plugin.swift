@@ -75,9 +75,9 @@ public class ImageCropPlugin: CAPPlugin, CropViewControllerDelegate {
                     image.draw(in: rect)
                     let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
                     UIGraphicsEndImageContext()
-                    try UIImageJPEGRepresentation(resizeImage!, 1.0)?.write(to: path, options: Data.WritingOptions.atomic)
+                    try resizeImage!.jpegData(compressionQuality: 1.0)?.write(to: path, options: Data.WritingOptions.atomic)
                 }else{
-                    try UIImageJPEGRepresentation(image, 1.0)?.write(to: path, options: Data.WritingOptions.atomic)
+                    try image.jpegData(compressionQuality: 1.0)?.write(to: path, options: Data.WritingOptions.atomic)
                 }
                 var object = JSObject()
                 object["value"] = CAPFileManager.getPortablePath(host: self.bridge.getLocalUrl(), uri: path)
